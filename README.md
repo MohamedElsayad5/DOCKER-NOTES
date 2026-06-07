@@ -82,20 +82,20 @@ Docker uses a **Client-Server Architecture** — think of it like ordering food 
 
 ```
 ┌──────────────┐      REST API      ┌─────────────────────────────┐
-│              │ ──────────────────► │                             │
-│   DOCKER     │                     │     DOCKER DAEMON           │
-│   CLIENT     │ ◄────────────────── │        (dockerd)            │
-│              │      Response       │                             │
-│  (You, with  │                     │  (The Kitchen — does the    │
-│   commands)  │                     │   actual work!)             │
-└──────────────┘                     └─────────────┬───────────────┘
+│              │ ──────────────────►│                             │
+│   DOCKER     │                    │     DOCKER DAEMON           │
+│   CLIENT     │ ◄──────────────────│        (dockerd)            │
+│              │      Response      │                             │
+│  (You, with  │                    │  (The Kitchen — does the    │
+│   commands)  │                    │   actual work!)             │
+└──────────────┘                    └─────────────┬───────────────┘
                                                    │
                                                    ▼
                                     ┌─────────────────────────────────┐
-                                    │         DOCKER REGISTRY          │
-                                    │   (Docker Hub / AWS ECR / GCR)   │
-                                    │                                   │
-                                    │     📦 Image Storage & Sharing   │
+                                    │         DOCKER REGISTRY         │
+                                    │   (Docker Hub / AWS ECR / GCR)  │
+                                    │                                 │
+                                    │    📦 Image Storage & Sharing   
                                     └─────────────────────────────────┘
 ```
 
@@ -115,16 +115,16 @@ Docker uses a **Client-Server Architecture** — think of it like ordering food 
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                                                                      │
-│   📋 RECIPE                    🍲 DISH                    📦 STORE   │
-│   (Image)                     (Container)                (Registry)  │
-│                                                                      │
-│   ┌─────────┐                 ┌─────────┐                ┌─────────┐ │
-│   │ Read-   │   docker run    │ Running│   docker push  │ Central │ │
+│                                                                     │
+│   📋 RECIPE                    🍲 DISH                  📦 STORE    
+│   (Image)                     (Container)               (Registry)  │
+│                                                                     │
+│   ┌─────────┐                 ┌─────────┐               ┌─────────┐ │
+│   │ Read-   │   docker run    │ Running |   docker push │ Central │ │
 │   │ only    │ ───────────────►│ instance│ ─────────────►│ Storage │ │
-│   │ Template│                 │ of Image│                │         │ │
-│   └─────────┘                 └─────────┘                └─────────┘ │
-│                                                                      │
+│   │ Template│                 │ of Image│               │         │ │
+│   └─────────┘                 └─────────┘               └─────────┘ │
+│                                                                     │
 │   "Class in OOP"            "Object in OOP"           "GitHub for   │
 │                                                       containers"   │
 └─────────────────────────────────────────────────────────────────────┘
@@ -145,12 +145,12 @@ Docker uses a **Client-Server Architecture** — think of it like ordering food 
 *Your day-to-day Docker dance routine:* 💃
 
 ```
-┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
-│          │    │          │    │          │    │          │    │          │
-│ 1. Write │    │ 2. Build │    │ 3. Test  │    │ 4. Push  │    │ 5. Run   │
-│Dockerfile│ ─► │  Image   │ ─► │ Container│ ─► │to Registry│ ─► │ on Prod  │
-│          │    │          │    │          │    │          │    │          │
-└──────────┘    └──────────┘    └──────────┘    └──────────┘    └──────────┘
+┌──────────┐    ┌──────────┐    ┌──────────┐    ┌────────── ┐    ┌──────────┐
+│          │    │          │    │          │    │           │    │          │
+│ 1. Write │    │ 2. Build │    │ 3. Test  │    │ 4. Push   │    │ 5. Run   |   
+│Dockerfile│ ─► │  Image   │ ─► │ Container│ ─► │to Registry│ ─► │ on Prod  │ 
+│          │    │          │    │          │    │           │    │          │
+└──────────┘    └──────────┘    └──────────┘    └────────── ┘    └──────────┘
      📝              🏗️              🧪              ☁️              🚀
 ```
 
@@ -301,20 +301,20 @@ Pro Tip: Custom networks give you automatic DNS — containers find each other b
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                      CONTAINER                              │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              WRITABLE CONTAINER LAYER                │   │
-│  │  ⚠️  DISAPPEARS WHEN CONTAINER IS DELETED! ⚠️        │   │
-│  └─────────────────────────────────────────────────────┘   │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              READ-ONLY IMAGE LAYERS                  │   │
-│  └─────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │              WRITABLE CONTAINER LAYER               │    │
+│  │  ⚠️  DISAPPEARS WHEN CONTAINER IS DELETED! ⚠️       │    │
+│  └─────────────────────────────────────────────────────┘    │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │              READ-ONLY IMAGE LAYERS                 │    │
+│  └─────────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────────┘
                            │
                            ▼
         ┌──────────────────────────────────────┐
-        │            VOLUME 📀                  │
-        │  ✅ SURVIVES container deletion!      │
-        │  (Stored on host filesystem)          │
+        │            VOLUME 📀                 |
+        │  ✅ SURVIVES container deletion!     │
+        │  (Stored on host filesystem)         │
         └──────────────────────────────────────┘
 ```
 
