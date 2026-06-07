@@ -46,17 +46,17 @@ A deep, practical, and visual cheat-sheet for mastering Docker. This guide cover
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        HARDWARE                                  │
+│                        HARDWARE                                 │
 ├─────────────────────────────────────────────────────────────────┤
-│                      HOST OPERATING SYSTEM                       │
+│                      HOST OPERATING SYSTEM                      │
 ├───────────────────┬─────────────────────────────────────────────┤
-│   HYPERVISOR      │              DOCKER ENGINE                   │
+│   HYPERVISOR      │              DOCKER ENGINE                  │
 ├───────┬───────┬───┼───────┬───────┬───────┬───────┬─────────────┤
 │ Guest │ Guest │   │ App A │ App B │ App C │ App D │             │
-│  OS   │  OS   │   │       │       │             │
+│  OS   │  OS   │   │       │       │       |       │             |            
 │ (GBs) │ (GBs) │   │       │       │       │       │             │
 ├───────┼───────┼───┼───────┴───────┴───────┴───────┴─────────────┤
-│ App A │ App B │   │              CONTAINERS (MBs)                 │
+│ App A │ App B │   │              CONTAINERS (MBs)               │
 └───────┴───────┴───┴─────────────────────────────────────────────┘
 VIRTUAL MACHINES                    CONTAINERS
 ```
